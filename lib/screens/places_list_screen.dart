@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:places_app/providers/great_places.dart';
 import 'package:places_app/screens/add_place_screen.dart';
+import 'package:provider/provider.dart';
 
 class PlacesListScreen extends StatelessWidget {
   @override
@@ -19,7 +21,25 @@ class PlacesListScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: CircularProgressIndicator(),
+        child: Consumer<GreatPlaces>(
+          builder: (ctx, places, child) => places.items.length <= 0
+              ? child
+              : ListView.builder(
+                  itemCount: places.items.length,
+                  itemBuilder: (ctx, i) => ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: FileImage(places.items[i].image),
+                    ),
+                    title: Text(places.items[i].title),
+                    onTap: () {
+                      // GO to details page
+                    },
+                  ),
+                ),
+          child: Center(
+            child: Text('Got no places yet, start adding some!'),
+          ),
+        ),
       ),
     );
   }
