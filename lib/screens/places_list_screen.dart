@@ -21,25 +21,34 @@ class PlacesListScreen extends StatelessWidget {
         ],
       ),
       body: Center(
-        child: Consumer<GreatPlaces>(
-          builder: (ctx, places, child) => places.items.length <= 0
-              ? child
-              : ListView.builder(
-                  itemCount: places.items.length,
-                  itemBuilder: (ctx, i) => ListTile(
-                    leading: CircleAvatar(
-                      backgroundImage: FileImage(places.items[i].image),
+        child: FutureBuilder(
+            future:
+                Provider.of<GreatPlaces>(context, listen: false).fetchPlaces(),
+            builder: (ctx, snapshot) => snapshot.connectionState ==
+                    ConnectionState.waiting
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Consumer<GreatPlaces>(
+                    builder: (ctx, places, child) => places.items.length <= 0
+                        ? child
+                        : ListView.builder(
+                            itemCount: places.items.length,
+                            itemBuilder: (ctx, i) => ListTile(
+                              leading: CircleAvatar(
+                                backgroundImage:
+                                    FileImage(places.items[i].image),
+                              ),
+                              title: Text(places.items[i].title),
+                              onTap: () {
+                                // GO to details page
+                              },
+                            ),
+                          ),
+                    child: Center(
+                      child: Text('Got no places yet, start adding some!'),
                     ),
-                    title: Text(places.items[i].title),
-                    onTap: () {
-                      // GO to details page
-                    },
-                  ),
-                ),
-          child: Center(
-            child: Text('Got no places yet, start adding some!'),
-          ),
-        ),
+                  )),
       ),
     );
   }
