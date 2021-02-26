@@ -35,7 +35,10 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 10,
                     ),
                     ImageInput(),
-                    FlatButton(),
+                    FlatButton(
+                      child: Text('Hello'),
+                      onPressed: () {},
+                    ),
                     TextField(),
                     TextField(),
                   ],
