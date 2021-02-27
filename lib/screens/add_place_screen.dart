@@ -46,7 +46,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add a New Place'),
+        title: const Text('Add a New Place'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -62,11 +62,11 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       decoration: InputDecoration(labelText: 'Title'),
                       controller: _titleController,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     ImageInput(_selectImage),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     LocationInput(_selectPlace),
                   ],
                 ),
@@ -74,8 +74,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
             ),
           ),
           RaisedButton.icon(
-            icon: Icon(Icons.add),
-            label: Text('Add Place'),
+            icon: const Icon(Icons.add),
+            label: const Text('Add Place'),
             onPressed: _savePlace,
             elevation: 0,
             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
